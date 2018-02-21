@@ -20,7 +20,8 @@ public class Task {
     }
 
     public Task insert() {
-        tasks ().save(this);
+        tasks().save(this);
+        return this;
     }
 
     public void remove() {
