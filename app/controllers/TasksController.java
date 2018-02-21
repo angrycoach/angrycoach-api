@@ -1,11 +1,21 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Task;
+import org.jongo.MongoCollection;
+import org.jongo.MongoCursor;
 import play.libs.Json;
 import play.mvc.*;
 
 import views.html.*;
+
+import java.util.List;
+import java.util.Spliterator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 
 public class TasksController extends Controller {
@@ -15,20 +25,17 @@ public class TasksController extends Controller {
         result.put("exampleField1", "foobar");
         result.put("exampleField2", "Hello world!");
 
+        MongoCollection tasks = Task.tasks();
 
-        Task task1 = new Task();
-        task1.text = "Estuadar Matematica";
-        task1.done = false;
-        JsonNode personJson = Json.toJson(task1);
+        MongoCursor<Task> iter = tasks.find().as(Task.class);
+        Stream<Task> stream = StreamSupport.stream(iter.spliterator(), false);
 
-        return ok(personJson);
+        List<JsonNode> jsons = stream.map(t -> Json.toJson(t)).collect(Collectors.toList());
+
+        ArrayNode arr = Json.newArray().addAll(jsons);
+        
+        return ok(arr);
     }
-
-    public static class Task {
-        public String text;
-        public boolean done;
-    }
-
 }
 
 
