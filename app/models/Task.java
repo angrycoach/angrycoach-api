@@ -1,5 +1,11 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.bson.types.ObjectId;
+import org.jongo.MongoCollection;
+import play.Play;
+import uk.co.panaxiom.playjongo.PlayJongo;
+
 public class Task {
 
     public String name;
@@ -22,7 +28,7 @@ public class Task {
     }
 
     public static Task findByName(String name) {
-        return tasks ().findOne("{name: #}", name).as(User.class);
+        return tasks ().findOne("{name: #}", name).as(Task.class);
     }
 
 }
