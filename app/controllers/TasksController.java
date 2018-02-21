@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Task;
+import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 import play.libs.Json;
@@ -35,6 +36,22 @@ public class TasksController extends Controller {
         ArrayNode arr = Json.newArray().addAll(jsons);
         
         return ok(arr);
+    }
+
+    public Result saveTask(){
+        String firstNome = "My First Task";
+        ObjectId firstId = new ObjectId("507f191e810c19729de860ea");
+
+        Task firstTask = new Task();
+        firstTask.name = firstNome;
+        firstTask.id = firstId;
+
+        try{
+            firstTask.insert();
+            return ok("Task = " + firstTask.name + " was saved successfully!");
+        }catch(Exception e){
+            return ok(e.getMessage());
+        }
     }
 }
 
