@@ -1,42 +1,20 @@
-@(tasks: List[Task], taskForm: Form[Task])
+@*
+ * This template takes a single argument, a String containing a
+ * message to display.
+ *@
+@(message: String)
 
-@import helper._
+@*
+ * Call the `main` template with two arguments. The first
+ * argument is a `String` with the title of the page, the second
+ * argument is an `Html` object containing the body of the page.
+ *@
+@main("Welcome to Play") {
 
-@main("Todo list") {
-<div class="buffer"/>
-<div class="container">
- <div class="header">
-  <div class="headerText">My Tasks</div>
-  <div class="notifyText">
-   @tasks.size() task(s)
-  </div>
- </div>
- <div class="addTask">
-  @form(routes.Application.newTask()) {
-  <div class="createInput">
-   <input type="text" id="label" name="label" value="" placeholder="add new task" class="createTextInput">
-   <!-- @inputText(taskForm("label"), 'placeholder -> "add new task", 'class ->"createTextInput") -->
-  </div>
-  <div class="bottonHolder">
-   <input type="submit" class="button creatBut" value="Create" />
-  </div>
-  }
- </div>
- <div class="taskPanel">
-  @for(task <- tasks) {
-  <div class="taskRow">
-   @if(task.label == "") {
-   Not Defined
-   }else {
-   <div class="taskText">@task.label</div>
-   }
-   <div class="taskAction">
-    @form(routes.Application.deleteTask(task.id)) {
-    <input type="submit" value="Delete">
-    }
-   </div>
-  </div>
-  }
- </div>
-</div>
+    @*
+     * Get an `Html` object by calling the built-in Play welcome
+     * template and passing a `String` message.
+     *@
+    @play20.welcome(message, style = "Java")
+
 }
