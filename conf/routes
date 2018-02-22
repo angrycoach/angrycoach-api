@@ -14,7 +14,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
 #
-GET     /getTask                    controllers.TasksController.getTask
+GET     /Task                    controllers.TasksController.getTask
 
 #
-POST     /saveTask                    controllers.TasksController.saveTask
+POST     /Task                    controllers.TasksController.saveTask

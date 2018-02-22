@@ -41,16 +41,15 @@ public class TasksController extends Controller {
     }
 
     public Result saveTask(){
-        JsonNode body = request().body().asJson();
 
-        Task firstTask = new Task();
-        firstTask.name = body.get("name").asText();
+        JsonNode body = request().body().asJson();
+        Task taskNew = Json.fromJson(body, Task.class);
 
         try{
-            firstTask.insert();
-            return ok("Task = " + firstTask.name + " was saved successfully!");
+            taskNew.insert();
+            return ok("Task = " + taskNew.name + " was saved successfully!");
         }catch(Exception e){
-            return ok(e.getMessage());
+            return badRequest(e.getMessage());
         }
     }
 }
