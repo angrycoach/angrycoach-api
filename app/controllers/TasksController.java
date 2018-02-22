@@ -41,10 +41,10 @@ public class TasksController extends Controller {
     }
 
     public Result saveTask(){
-        String firstNome = "My Second Task";
+        JsonNode body = request().body().asJson();
 
         Task firstTask = new Task();
-        firstTask.name = firstNome;
+        firstTask.name = body.get("name").asText();
 
         try{
             firstTask.insert();
