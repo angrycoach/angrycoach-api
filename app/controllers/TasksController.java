@@ -21,6 +21,8 @@ import java.util.stream.StreamSupport;
 
 public class TasksController extends Controller {
 
+
+
     public Result getTask() {
         ObjectNode result = Json.newObject();
         result.put("exampleField1", "foobar");
@@ -39,12 +41,10 @@ public class TasksController extends Controller {
     }
 
     public Result saveTask(){
-        String firstNome = "My First Task";
-        ObjectId firstId = new ObjectId("507f191e810c19729de860ea");
+        String firstNome = "My Second Task";
 
         Task firstTask = new Task();
         firstTask.name = firstNome;
-        firstTask.id = firstId;
 
         try{
             firstTask.insert();
