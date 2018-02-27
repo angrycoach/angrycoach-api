@@ -14,7 +14,10 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
 #
-GET     /Task                    controllers.TasksController.getTask
+GET     /task                    controllers.TasksController.getTask
 
 #
-POST     /Task                    controllers.TasksController.saveTask
+POST     /task                   controllers.TasksController.saveTask
+
+#
+PUT     /task/:uuid              controllers.TasksController.atualizar(uuid: String)

@@ -52,6 +52,22 @@ public class TasksController extends Controller {
             return badRequest(e.getMessage());
         }
     }
+
+    public Result atualizar(String uuid){
+
+        JsonNode body = request().body().asJson();
+        Task taskNew = Json.fromJson(body, Task.class);
+
+        Task task = Task.findByUuid(uuid);
+        task.name = taskNew.name;
+
+        try{
+            task.insert();
+            return ok("Task = " + task.name + " was updated successfully!");
+        }catch(Exception e){
+            return badRequest(e.getMessage());
+        }
+    }
 }
 
 
