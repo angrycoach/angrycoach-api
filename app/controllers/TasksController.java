@@ -60,6 +60,8 @@ public class TasksController extends Controller {
 
         Task task = Task.findByUuid(uuid);
         task.name = taskNew.name;
+        task.done = taskNew.done;
+        task.deleted = taskNew.deleted;
 
         try{
             task.insert();
