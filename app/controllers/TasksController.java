@@ -24,19 +24,12 @@ public class TasksController extends Controller {
 
 
     public Result getTask() {
-        ObjectNode result = Json.newObject();
-        result.put("exampleField1", "foobar");
-        result.put("exampleField2", "Hello world!");
-
         MongoCollection tasks = Task.tasks();
-
         MongoCursor<Task> iter = tasks.find().as(Task.class);
         Stream<Task> stream = StreamSupport.stream(iter.spliterator(), false);
-
         List<JsonNode> jsons = stream.map(t -> Json.toJson(t)).collect(Collectors.toList());
-
         ArrayNode arr = Json.newArray().addAll(jsons);
-        
+
         return ok(arr);
     }
 
