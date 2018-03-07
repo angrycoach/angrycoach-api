@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
-  "uk.co.panaxiom" %% "play-jongo" % "2.0.0-jongo1.3"
+  "uk.co.panaxiom" %% "play-jongo" % "2.0.0-jongo1.3",
+  filters
 )
